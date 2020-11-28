@@ -9,7 +9,7 @@ export vec
 # Following Stefan Gustavson's paper "Simplex noise demystified":
 # http://www.itn.liu.se/~stegu/simplexnoise/simplexnoise.pdf
 
-proc vec4[T](v: Vec4b)          : Vec4[T] {.inline.} = Vec4[T](arr: [T(v.x), T(v.y), T(v.z), T(v.w)])
+proc vec4[T](v: Vec4b): Vec4[T] {.inline.} = Vec4[T](arr: [T(v.x), T(v.y), T(v.z), T(v.w)])
 
 proc gtc_grad4[T](j: T; ip: Vec4[T]): Vec4[T] =
   var pXYZ: Vec3[T] = floor(fract(vec3(j) * ip.xyz) * T(7)) * ip[2] - T(1);

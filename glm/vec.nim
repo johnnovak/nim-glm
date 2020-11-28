@@ -272,9 +272,11 @@ macro genSwizzleOps(chars: static[string]): untyped =
         for m in 0 .. 3:
           result.add swizzleMethods(i,j,k,m, chars)
 
+# TODO make xyzw swizzle ops opt-in too
+# when defined(GLM_SWIZZLE_OPS_XYZW): genSwizzleOps("xyzw")
 genSwizzleOps("xyzw")
-genSwizzleOps("rgba")
-genSwizzleOps("stpq")
+when defined(GLM_SWIZZLE_OPS_RGBA): genSwizzleOps("rgba")
+when defined(GLM_SWIZZLE_OPS_STPQ): genSwizzleOps("stpq")
 
 proc caddr*[N,T](v:var Vec[N,T]): ptr T {.inline.} =
   ## Address getter to pass vector to native-C openGL functions as pointers
